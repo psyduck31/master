@@ -3,12 +3,12 @@ import random
 number = random.randint(0, 100)
 fortune = False
 while fortune == False:
-    predict = int(input('Введите ваше число: '))
+    predict = int(input('Р’РІРµРґРёС‚Рµ РІР°С€Рµ С‡РёСЃР»Рѕ: '))
     if predict == number:
-        print('Поздравляю! Вы выиграли!')
+        print('РџРѕР·РґСЂР°РІР»СЏСЋ! Р’С‹ РІС‹РёРіСЂР°Р»Рё!')
         fortune = True
     else:
         if predict > number:
-            print('Загаданое число меньше!')
+            print('Р—Р°РіР°РґР°РЅРЅРѕРµ С‡РёСЃР»Рѕ РјРµРЅСЊС€Рµ!')
         else:
-            print('Загаданое число больше!')
+            print('Р—Р°РіР°РґР°РЅРЅРѕРµ С‡РёСЃР»Рѕ Р±РѕР»СЊС€Рµ!')
