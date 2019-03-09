@@ -1,0 +1,34 @@
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<div align="center">
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+</div>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <div align="center">
+        {{ form.username.label }}
+        {{ form.username  }}
+    </div>
+    <div align="center">
+        {{ form.password.label }}
+        {{ form.password }}
+    </div>
+    <div align="center">
+        {{ form.confirm_password.label }}
+        {{ form.confirm_password }}
+    </div>
+    <div align="center">
+        {{ form.email.label }}
+        {{ form.email }}
+    </div>
+    <div align="center">
+        {{ form.submit }}
+    </div>
+</form>
