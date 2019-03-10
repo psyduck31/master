@@ -6,6 +6,10 @@
     color: green;
 }
 
-.body {
-	background-color: black;
+div.absolute {
+  position: absolute;
+  top: 80px;
+  right: 0;
+  width: 200px;
+  height: 100px;
 }

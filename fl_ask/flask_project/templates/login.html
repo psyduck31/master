@@ -13,7 +13,7 @@
 </div>
 <form method="post">
         {{ form.hidden_tag() }}
-    <div class="form-row">
+    <div class="form-row", style="margin-left: 10px; margin-top: 10px">
         <div class="col-md-2 mb-5">
             {{ form.username.label }}
             {{ form.username(class="form-control") }}
@@ -23,6 +23,6 @@
             {{ form.password(class="form-control") }}
         </div>
     </div>
-    {{ form.submit(class="btn btn-primary") }}
+    {{ form.submit(class="btn btn-primary", style="margin-left: 10px; margin-top: 10px") }}
 </form>
 {% endblock %}

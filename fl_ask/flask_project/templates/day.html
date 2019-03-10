@@ -1,49 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
 {% for data in all_rows %}
-	<table class="table table-bordered table-hover">
-		<thead>
-			<tr class="d-flex">
-				<th class="col-5">{{data[0]}}</th>
-			</tr>
-			<tr class="d-flex">
-				<th class="col-1">#</th>
-				<th class="col-1">Время</th>
-				<th class="col-3">Предмет</th>
-			</tr>
-		</thead>
-		<tbody>
-				<tr class="d-flex">
-					<th class="col-1">1</th>
-					<td class="col-1">9:30-11:05</td>
-					<td class="col-3">{{ data[1] }}</td>
-				</tr>
-				<tr class="d-flex">
-					<th class="col-1">2</th> 
-					<td class="col-1">11:15-12:50</td>
-					<td class="col-3">{{ data[2] }}</td>
-				</tr>
-				<tr class="d-flex">
-					<th class="col-1">3</th>
-					<td class="col-1">13:00-14:35</td>
-					<td class="col-3">{{ data[3] }}</td>
-				</tr>
-				<tr class="d-flex">
-					<th class="col-1">4</th>
-					<td class="col-1">15:15-16:45</td>
-					<td class="col-3">{{ data[4] }}</td>
-				</tr>
-				<tr class="d-flex">
-					<th class="col-1">5</th>
-					<td class="col-1">16:55-18:25</td>
-					<td class="col-3">{{ data[5] }}</td>
-				</tr>
-				<tr class="d-flex">
-					<th class="col-1">6</th>
-					<td class="col-1">19:00-20:35</td>
-					<td class="col-3">{{ data[6] }}</td>
-				</tr>
-		</tbody>
-	</table>
+<div class="card-deck d-inline-block", style="margin-top: 20px; margin-right: 0px; margin-left: 12px">
+	<div class="card text-white bg-dark mb-3" style="width: 14rem;">
+		<div class="card-header">{{ data[0] }}</div>	
+  		<div class="card-body">
+  			<p class="card-text">{{ data[1] }}</p>
+  			<p class="card-text">{{ data[2] }}</p>
+ 	 		<p class="card-text">{{ data[3] }}</p>
+ 	 		<p class="card-text">{{ data[4] }}</p>
+ 			<p class="card-text">{{ data[5] }}</p>
+  			<p class="card-text">{{ data[6] }}</p>
+  		</div>
+	</div>
+</div>
 {% endfor %}
 {% endblock %}
