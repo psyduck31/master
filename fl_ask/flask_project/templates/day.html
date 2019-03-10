@@ -1,0 +1,12 @@
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+{% for data in all_rows %}
+<table>
+			<tr><th>{{ data[0] }}</th></tr>
+			<tr><td>1. {{ data[1] }} @ 9:30-11:05</td></tr>
+			<tr><td>2. {{ data[2] }} @ 11:15-12:50</td></tr>
+			<tr><td>3. {{ data[3] }} @ 13:00-14:35</td></tr>
+			<tr><td>4. {{ data[4] }} @ 15:15-16:45</td></tr>
+			<tr><td>5. {{ data[5] }} @ 16:55-18:25</td></tr>
+			<tr><td>6. {{ data[6] }} @ 19:00-20:35</td></tr>
+</table>
+{% endfor %}

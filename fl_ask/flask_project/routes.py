@@ -1,8 +1,9 @@
 from flask import render_template, url_for, flash, redirect, request
 from flask_project import app, db, bcrypt
-from flask_project.models import User
-from flask_project.forms import Registration, Login
+from flask_project.models import User, Raspisanie
+from flask_project.forms import Registration, Login, Edit
 from flask_login import login_user, current_user, logout_user, login_required
+import sqlite3
 
 
 @app.route('/')
@@ -12,7 +13,7 @@ def home():
 
 @app.route('/registration', methods=["GET", "POST"])
 def registration():
-	if current_user.is_authenticated():
+	if current_user.is_authenticated:
 		return redirect(url_for('home'))
 	form = Registration()
 	if form.validate_on_submit():
@@ -31,19 +32,39 @@ def registration():
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
+	if current_user.is_authenticated:
+		return redirect(url_for('home'))
 	form = Login()
 	if form.validate_on_submit():
 		user = User.query.filter_by(username=form.username.data).first()
 		if user and bcrypt.check_password_hash(user.password, form.password.data):
 			login_user(user, remember=True)
 			return redirect(url_for('home'))
+		else:
+			flash('Неверно введен логин или пароль, либо пользователь не сущесвует!', 'error')
 	return render_template('login.html', form=form)
 
 
-@app.route('/check')
+@app.route('/day')
+def day():
+	conn = sqlite3.connect('flask_project/site.db')
+	c = conn.cursor()
+	c.execute('SELECT * FROM raspisanie')
+	all_rows = c.fetchall()
+	return render_template('day.html', all_rows=all_rows)
+
+@app.route('/edit', methods=["GET", "POST"])
 @login_required
-def check():
-	return('Вы успешно вошли в аккаунт')
+def edit():
+	form = Edit()
+	if form.validate_on_submit():
+		print(form.data)
+		conn = sqlite3.connect('flask_project/site.db')
+		c = conn.cursor()
+		c.execute("""UPDATE raspisanie SET day_1 = ?, day_2 = ?, day_3 = ?, day_4 = ?, day_5 = ?, day_6 = ? WHERE day = ?""",
+			(form.day_1.data, form.day_2.data, form.day_3.data, form.day_4.data, form.day_5.data, form.day_6.data, form.day.data))
+		conn.commit()
+	return render_template('edit.html', form=form)
 
 
 @app.route('/logout')
