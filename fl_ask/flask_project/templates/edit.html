@@ -1,41 +1,30 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="mt-0">
-<form method="POST", style="margin-left: 10px; margin-top: 10px">
-	{{ form.hidden_tag() }}
-	<div class="form-row align-items-center">
-		<div class="col-auto my-4">
-			{{ form.day(class="custom-select mr-sm-2") }}
-		</div>
-	</div>
-	<div class="form-row">
-		<div class="col-md-2 mb-5">
-			{{ form.day_1.label }}
-			{{ form.day_1(class="form-control") }}
-		</div>
-		<div class="col-md-2 mb-5">
-			{{ form.day_3.label }}
-			{{ form.day_3(class="form-control") }}
-		</div>
-		<div class="col-md-2 mb-5">
-			{{ form.day_5.label }}
-			{{ form.day_5(class="form-control") }}
-		</div>
-	</div>
-	<div class="form-row">
-		<div class="col-md-2 mb-5">
-			{{ form.day_2.label }}
-			{{ form.day_2(class="form-control") }}
-		</div>
-		<div class="col-md-2 mb-5">
-			{{ form.day_4.label }}
-			{{ form.day_4(class="form-control") }}
-		</div>
-		<div class="col-md-2 mb-5">
-			{{ form.day_6.label }}
-			{{ form.day_6(class="form-control") }}
-		</div>
-	</div>
-	{{form.submit(class="btn btn-primary")}}
-</form>
+<div class="card w-10 text-black bg-light", style="margin: 18px 37%;">
+    <div class="card-body">
+        <form method="post">
+            {{ form.hidden_tag() }}
+        <div class="form-group">
+            <div class="col-md-13 mb-2">
+            	{{ form.day(class="custom-select mr-sm-2") }}
+                {{ form.day_1.label }}
+                {{ form.day_1(class="form-control") }}
+                {{ form.day_2.label }}
+                {{ form.day_2(class="form-control") }}
+                {{ form.day_3.label }}
+                {{ form.day_3(class="form-control") }}
+                {{ form.day_4.label }}
+                {{ form.day_4(class="form-control") }}
+                {{ form.day_5.label }}
+                {{ form.day_5(class="form-control") }}
+                {{ form.day_6.label }}
+                {{ form.day_6(class="form-control") }}
+            </div>
+            <div>
+            {{ form.submit(class="btn btn-primary", style="width:310px") }}
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

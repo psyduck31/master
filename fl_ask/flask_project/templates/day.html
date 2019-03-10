@@ -2,8 +2,8 @@
 {% block content %}
 {% for data in all_rows %}
 <div class="card-deck d-inline-block", style="margin-top: 20px; margin-right: 0px; margin-left: 12px">
-	<div class="card text-white bg-dark mb-3" style="width: 14rem; height: 20rem;">
-		<div class="card-header">{{ data[0] }}</div>	
+	<div class="card mb-3 text-white bg-dark" style="width: 14rem; height: 20rem">
+		<div class="card-header" style="font-weight: bold;">{{ data[0] }}</div>	
   		<div class="card-body">
   			<p class="card-text">{{ data[1] }}</p>
   			<p class="card-text">{{ data[2] }}</p>

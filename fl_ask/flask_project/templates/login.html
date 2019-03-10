@@ -11,22 +11,23 @@
     {% endif %}
 {% endwith %}
 </div>
-<div class="card w-25 text-black bg-light", style="margin: 10px 37%;">
+<div class="card w-10 text-black bg-light", style="margin: 50px 37%;">
     <div class="card-body">
-        <h5 class="card-title" align="center">Войдите в аккаунт!</h5>
         <form method="post">
             {{ form.hidden_tag() }}
         <div class="form-group">
-            <div class="col-md-10 mb-1">
+            <div class="col-md-13 mb-2">
                 {{ form.username.label }}
                 {{ form.username(class="form-control") }}
             </div>
-            <div class="col-md-10 mb-0">
+            <div class="col-md-13 mb-2">
                 {{ form.password.label }}
                 {{ form.password(class="form-control") }}
             </div>
+            <div>
+            {{ form.submit(class="btn btn-primary", style="width:315px") }}
+            </div>
         </div>
-        {{ form.submit(class="btn btn-primary", style="margin-left: 10px; margin-top: 10px; width: 14rem;") }}
         </form>
     </div>
 </div>
