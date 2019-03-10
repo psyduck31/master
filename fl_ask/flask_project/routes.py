@@ -6,11 +6,6 @@ from flask_login import login_user, current_user, logout_user, login_required
 import sqlite3
 
 
-@app.route('/')
-def home():
-	return('Hello world!')
-
-
 @app.route('/registration', methods=["GET", "POST"])
 def registration():
 	if current_user.is_authenticated:
@@ -45,8 +40,8 @@ def login():
 	return render_template('login.html', form=form)
 
 
-@app.route('/day')
-def day():
+@app.route('/')
+def home():
 	conn = sqlite3.connect('flask_project/site.db')
 	c = conn.cursor()
 	c.execute('SELECT * FROM raspisanie')

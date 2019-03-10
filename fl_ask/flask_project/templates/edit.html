@@ -1,32 +1,41 @@
-<form method='post'>
+{% extends "layout.html" %}
+{% block content %}
+<div class="mt-0">
+<form method="POST">
 	{{ form.hidden_tag() }}
-	<div>
-		{{ form.day.label }}
-		{{ form.day }}
+	<div class="form-row align-items-center">
+		<div class="col-auto my-4">
+			{{ form.day(class="custom-select mr-sm-2") }}
+		</div>
 	</div>
-	<div>
-		{{ form.day_1.label }}
-		{{ form.day_1 }}
+	<div class="form-row">
+		<div class="col-md-2 mb-5">
+			{{ form.day_1.label }}
+			{{ form.day_1(class="form-control") }}
+		</div>
+		<div class="col-md-2 mb-5">
+			{{ form.day_3.label }}
+			{{ form.day_3(class="form-control") }}
+		</div>
+		<div class="col-md-2 mb-5">
+			{{ form.day_5.label }}
+			{{ form.day_5(class="form-control") }}
+		</div>
 	</div>
-	<div>
-		{{ form.day_2.label }}
-		{{ form.day_2 }}
+	<div class="form-row">
+		<div class="col-md-2 mb-5">
+			{{ form.day_2.label }}
+			{{ form.day_2(class="form-control") }}
+		</div>
+		<div class="col-md-2 mb-5">
+			{{ form.day_4.label }}
+			{{ form.day_4(class="form-control") }}
+		</div>
+		<div class="col-md-2 mb-5">
+			{{ form.day_6.label }}
+			{{ form.day_6(class="form-control") }}
+		</div>
 	</div>
-	<div>
-		{{ form.day_3.label }}
-		{{ form.day_3 }}
-	</div>
-	<div>
-		{{ form.day_4.label }}
-		{{ form.day_4 }}
-	</div>
-	<div>
-		{{ form.day_5.label }}
-		{{ form.day_5 }}
-	</div>
-	<div>
-		{{ form.day_6.label }}
-		{{ form.day_6 }}
-	</div>
-	{{ form.submit }}
+	{{form.submit(class="btn btn-primary")}}
 </form>
+{% endblock %}

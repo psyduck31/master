@@ -1,4 +1,5 @@
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+{% extends "layout.html" %}
+{% block content %}
 <div align="center">
 {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -12,23 +13,18 @@
 </div>
 <form method="post">
     {{ form.hidden_tag() }}
-    <div align="center">
-        {{ form.username.label }}
-        {{ form.username  }}
+    <div class="form-row">
+        <div class="col-md-2 mb-5">
+            {{ form.username.label }}
+            {{ form.username(class="form-control") }}
+            {{ form.password.label }}
+            {{ form.password(class="form-control") }}
+            {{ form.confirm_password.label }}
+            {{ form.confirm_password(class="form-control") }}
+            {{ form.email.label }}
+            {{ form.email(class="form-control") }}
+        </div>
     </div>
-    <div align="center">
-        {{ form.password.label }}
-        {{ form.password }}
-    </div>
-    <div align="center">
-        {{ form.confirm_password.label }}
-        {{ form.confirm_password }}
-    </div>
-    <div align="center">
-        {{ form.email.label }}
-        {{ form.email }}
-    </div>
-    <div align="center">
-        {{ form.submit }}
-    </div>
+    {{ form.submit(class="btn btn-primary") }}
 </form>
+{% endblock %}
