@@ -3,7 +3,7 @@ from flask_project import app, db, bcrypt
 from flask_project.models import User, Raspisanie
 from flask_project.forms import Registration, Login, Edit
 from flask_login import login_user, current_user, logout_user, login_required
-import sqlite3
+import sqlite3, json
 
 
 @app.route('/registration', methods=["GET", "POST"])
@@ -66,3 +66,42 @@ def edit():
 def logout():
 	logout_user()
 	return redirect(url_for('home'))
+
+
+@app.route('/api/raspisanie/all', methods=["GET"])
+def api_raspisanie():
+	conn = sqlite3.connect('flask_project/site.db')
+	c = conn.cursor()
+	c.execute("SELECT * FROM raspisanie")
+	rot = c.fetchall()
+	return json.dumps(rot, ensure_ascii=False)
+
+
+@app.route('/api/raspisanie', methods=["GET"])
+def api_id():
+	conn = sqlite3.connect('flask_project/site.db')
+	c = conn.cursor()
+	c.execute("SELECT * FROM raspisanie")
+	all = c.fetchall()
+	if 'id' in request.args:
+		id = int(request.args['id'])
+	if 0 <= id <= 4:
+		return json.dumps(all[id], ensure_ascii=False)
+	else:
+		return 'Нет такого айди'
+@app.route('/api/raspisanie/edit', methods=["POST"])
+def api_edit():
+	conn = sqlite3.connect('flask_project/site.db')
+	c = conn.cursor()
+	if request.method == 'POST':
+		day = str(request.args['day'])
+		day_1 = str(request.args['day_1'])
+		day_2 = str(request.args['day_2'])
+		day_3 = str(request.args['day_3'])
+		day_4 = str(request.args['day_4'])
+		day_5 = str(request.args['day_5'])
+		day_6 = str(request.args['day_6'])
+		c.execute("""UPDATE raspisanie SET day_1 = ?, day_2 = ?, day_3 = ?, day_4 = ?, day_5 = ?, day_6 = ? WHERE day = ?""",
+			(day_1, day_2, day_3, day_4, day_5, day_6, day))
+		conn.commit()
+	return 'api post request'

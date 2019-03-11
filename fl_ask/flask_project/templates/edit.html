@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="card w-10 text-black bg-light", style="margin: 18px 37%;">
+<div class="card w-10 text-black bg-light", style="margin: 15px 37%;">
     <div class="card-body">
         <form method="post">
             {{ form.hidden_tag() }}
         <div class="form-group">
-            <div class="col-md-13 mb-2">
+            <div class="col-md-13 mb-3">
             	{{ form.day(class="custom-select mr-sm-2") }}
                 {{ form.day_1.label }}
                 {{ form.day_1(class="form-control") }}
@@ -21,7 +21,7 @@
                 {{ form.day_6(class="form-control") }}
             </div>
             <div>
-            {{ form.submit(class="btn btn-primary", style="width:310px") }}
+            {{ form.submit(class="btn btn-primary", style="width:314px") }}
             </div>
         </div>
         </form>
