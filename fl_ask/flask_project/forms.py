@@ -27,3 +27,13 @@ class Edit(FlaskForm):
 	day_5 = StringField('Пятая пара')
 	day_6 = StringField('Шестая пара')
 	submit = SubmitField('Изменить расписание')
+
+
+class Edit_api(FlaskForm):
+	day = StringField(validators=[DataRequired()])
+	day_1 = StringField()
+	day_2 = StringField()
+	day_3 = StringField()
+	day_4 = StringField()
+	day_5 = StringField()
+	day_6 = StringField()

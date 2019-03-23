@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from flask_project import app, db, bcrypt
 from flask_project.models import User, Raspisanie
-from flask_project.forms import Registration, Login, Edit
+from flask_project.forms import Registration, Login, Edit, Edit_api
 from flask_login import login_user, current_user, logout_user, login_required
 import sqlite3, json
 
@@ -12,6 +12,10 @@ def registration():
 		return redirect(url_for('home'))
 	form = Registration()
 	if form.validate_on_submit():
+		if len(form.password.data) < 8:
+			flash('Пароль должен быть больше 8 символов!', 'error')
+		if form.password.data != form.confirm_password.data:
+			flash('Пароли должны совпадать!', 'error')
 		username = User.query.filter_by(username=form.username.data).first()
 		email = User.query.filter_by(email=form.email.data).first()
 		if username or email:
@@ -36,11 +40,12 @@ def login():
 			login_user(user, remember=True)
 			return redirect(url_for('home'))
 		else:
-			flash('Неверно введен логин или пароль, либо пользователь не сущесвует!', 'error')
+			flash('Неверно введен логин или пароль, либо пользователь не существует!', 'error')
 	return render_template('login.html', form=form)
 
 
 @app.route('/')
+@login_required
 def home():
 	conn = sqlite3.connect('flask_project/site.db')
 	c = conn.cursor()
@@ -89,19 +94,36 @@ def api_id():
 		return json.dumps(all[id], ensure_ascii=False)
 	else:
 		return 'Нет такого айди'
+
+
 @app.route('/api/raspisanie/edit', methods=["POST"])
 def api_edit():
-	conn = sqlite3.connect('flask_project/site.db')
-	c = conn.cursor()
-	if request.method == 'POST':
-		day = str(request.args['day'])
-		day_1 = str(request.args['day_1'])
-		day_2 = str(request.args['day_2'])
-		day_3 = str(request.args['day_3'])
-		day_4 = str(request.args['day_4'])
-		day_5 = str(request.args['day_5'])
-		day_6 = str(request.args['day_6'])
-		c.execute("""UPDATE raspisanie SET day_1 = ?, day_2 = ?, day_3 = ?, day_4 = ?, day_5 = ?, day_6 = ? WHERE day = ?""",
-			(day_1, day_2, day_3, day_4, day_5, day_6, day))
-		conn.commit()
-	return 'api post request'
+	if request.method == "POST":
+		content = request.json
+		profile = User.query.filter_by(username=content['username']).first()
+		print(content)
+		if profile and bcrypt.check_password_hash(profile.password, content['password']):
+			conn = sqlite3.connect('flask_project/site.db')
+			c = conn.cursor()
+			day = str(content['day'])
+			day_1 = str(content['day_1'])
+			day_2 = str(content['day_2'])
+			day_3 = str(content['day_3'])
+			day_4 = str(content['day_4'])
+			day_5 = str(content['day_5'])
+			day_6 = str(content['day_6'])
+			c.execute("UPDATE raspisanie SET day_1 = ?, day_2 = ?, day_3 = ?, day_4 = ?, day_5 = ?, day_6 = ? WHERE day = ?",
+				(day_1, day_2, day_3, day_4, day_5, day_6, day))
+			conn.commit()
+			return 'api post request'
+
+		else: return 'Имя пользователя или пароль введены неправильно'
+	return 'Не получилось :('
+"""
+
+@app.route('/api/raspisanie/edit', methods=["POST"])
+def api_edit():
+	if request.method == "POST":
+		content = request.json
+	return('Получилось? Или не получилось?')
+"""
